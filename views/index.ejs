@@ -1,0 +1,47 @@
+<%- include('partials/header') -%>
+<main>
+  <!-- Todo Creation Form -->
+  <section class="create-todo">
+    <form action="/add" method="POST">
+      <input type="text" name="content" placeholder="Enter new todo" required>
+      <select name="priority">
+        <option value="Low">Low Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="High">High Priority</option>
+      </select>
+      <button type="submit">Add Todo</button>
+    </form>
+  </section>
+
+  <!-- Filter Todos by Priority -->
+  <section class="filter-todo">
+    <form action="/" method="GET">
+      <label for="priorityFilter">Filter by Priority:</label>
+      <select name="priority" id="priorityFilter">
+        <option value="">All</option>
+        <option value="Low" <%= selectedPriority === 'Low' ? 'selected' : '' %>>Low</option>
+        <option value="Medium" <%= selectedPriority === 'Medium' ? 'selected' : '' %>>Medium</option>
+        <option value="High" <%= selectedPriority === 'High' ? 'selected' : '' %>>High</option>
+      </select>
+      <button type="submit">Filter</button>
+    </form>
+  </section>
+
+  <!-- Todo List Display -->
+  <section class="todo-list">
+    <ul>
+      <% todos.forEach(function(todo) { %>
+        <li>
+          <span>
+            <strong>[<%= todo.priority %>]</strong> <%= todo.content %>
+          </span>
+          <span>
+            <a href="/edit/<%= todo.id %>">Edit</a>
+            <a href="/delete/<%= todo.id %>" onclick="return confirm('Are you sure you want to delete this todo?');">Delete</a>
+          </span>
+        </li>
+      <% }); %>
+    </ul>
+  </section>
+</main>
+<%- include('partials/footer') -%>

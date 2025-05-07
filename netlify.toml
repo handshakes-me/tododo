@@ -1,0 +1,4 @@
+[build]
+  command = "echo 'No build needed'"  # Since this is a dynamic app, you can use a dummy command.
+  publish = "public"                   # Static assets will be served from the public folder.
+  functions = "functions"              # Your serverless functions (Express app).
